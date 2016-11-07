@@ -15,12 +15,16 @@ module.exports.uploadByFile = function (request, response, next) {
                 success: true,
                 url: data.link
             });
+
+            cleanFile(path_image);
         })
         .catch(function (error) {
             response.json({
                 success: false,
                 error: error
             });
+
+            cleanFile(path_image);
         });
 };
 
@@ -41,3 +45,11 @@ module.exports.uploadByURL = function (request, response, next) {
             });
         });
 };
+
+const fs = require('fs');
+
+function cleanFile(path) {
+    fs.unlink(path, function () {
+        console.log('Delete success!');
+    });
+}
