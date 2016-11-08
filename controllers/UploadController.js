@@ -13,7 +13,13 @@ module.exports.uploadByFile = function (request, response, next) {
         .then(function (data) {
             response.json({
                 success: true,
-                url: data.link
+                data: {
+                    url: data.link,
+                    width: data.width,
+                    height: data.height,
+                    size: data.size,
+                    type: data.type
+                }
             });
 
             cleanFile(path_image);
@@ -35,7 +41,13 @@ module.exports.uploadByURL = function (request, response, next) {
         .then(function (data) {
             response.json({
                 success: true,
-                url: data.link
+                data: {
+                    url: data.link,
+                    width: data.width,
+                    height: data.height,
+                    size: data.size,
+                    type: data.type
+                }
             });
         })
         .catch(function (error) {
