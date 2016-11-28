@@ -1,7 +1,15 @@
 'use strict';
 
+function helperConverterSSL(data) {
+    let link = data.link || '';
+    link = link.replace('http://', 'https://');
+    data.link = link;
+
+    return data;
+}
+
 module.exports = (function () {
-    var imgur = require('imgur');
+    let imgur = require('imgur');
 
     return {
         uploadByFile: uploadByFile,
@@ -12,7 +20,10 @@ module.exports = (function () {
         return new Promise(function (resolve, reject) {
             imgur.uploadFile(path)
                 .then(function (json) {
-                    resolve(json.data);
+                    let data = json.data;
+                    data = helperConverterSSL(data);
+
+                    resolve(data);
                 })
                 .catch(function (err) {
                     reject(err);
@@ -24,7 +35,10 @@ module.exports = (function () {
         return new Promise(function (resolve, reject) {
             imgur.uploadUrl(url)
                 .then(function (json) {
-                    resolve(json.data);
+                    let data = json.data;
+                    data = helperConverterSSL(data);
+
+                    resolve(data);
                 })
                 .catch(function (err) {
                     reject(err);

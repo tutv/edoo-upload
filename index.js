@@ -1,16 +1,16 @@
 'use strict';
 
-var express = require('express');
-var cors = require('cors');
-var app = express();
+const express = require('express');
+const cors = require('cors');
+const app = express();
 app.use(cors());
 
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-var multer = require('multer');
-var upload = multer({dest: 'tmp-images/'});
+const multer = require('multer');
+const upload = multer({dest: 'tmp-images/'});
 
 const UploadCtrl = require('./controllers/UploadController');
 
